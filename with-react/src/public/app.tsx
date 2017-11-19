@@ -1,7 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import "./app.scss";
-import { Header } from "./components/Header";
+import reducers from "./services/reducers";
 
-ReactDOM.render(<Header text="Hello React!" />,
+const store = createStore(reducers);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <p>TODO</p>
+    </Provider>,
     document.getElementById("root"));
