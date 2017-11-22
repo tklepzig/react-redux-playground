@@ -55,7 +55,7 @@ export const setValue = (value: number): SetValueAction => ({ type: Actions.SetV
 const myData: Reducer<StateFromProps> = (state = { value: 0 }, action: AnyAction): StateFromProps => {
     switch (action.type) {
         case Actions.SetValue:
-            return { ...state, value: action.value };
+            return { value: action.value };
         default:
             return state;
     }
