@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { AnyAction, combineReducers, Dispatch, Reducer } from "redux";
+import { Action, AnyAction, combineReducers, Dispatch, Reducer } from "redux";
 import { Input } from "./Input";
 import { Slider } from "./Slider";
 
@@ -24,38 +24,45 @@ interface StateFromProps {
 }
 
 interface DispatchFromProps {
-    valueChanged: (e: any) => void;
+    valueChanged: (e: any) => SetValueAction;
 }
 
 // Map Redux state to component props
-const mapStateToProps =
-    (state: StateFromProps) => ({ value: state.value });
+const mapStateToProps = (state: StoreState) => ({ value: state.myData.value });
 
 // Map Redux actions to component props
 const mapDispatchToProps =
-    (dispatch: Dispatch<number>) => ({ valueChanged: (e: any) => dispatch(setValue(e.target.value as number)) });
+    (dispatch: Dispatch<StoreState>) => ({ valueChanged: (e: any) => dispatch(setValue(e.target.value)) });
 
 // Connected Component
-export default connect<StateFromProps, DispatchFromProps, void, StartProps>(
+export default connect<StateFromProps, DispatchFromProps, {}, StoreState>(
     mapStateToProps,
     mapDispatchToProps
 )(Start as React.ComponentClass<StartProps>);
 
 // action
-export const setValue = (v: number): AnyAction => ({ type: "setValue", value: v });
+export enum Actions {
+    SetValue
+}
+
+export interface SetValueAction extends Action {
+    value: number;
+}
+
+export const setValue = (value: number): SetValueAction => ({ type: Actions.SetValue, value });
 
 // reducer
-const value: Reducer<number> = (state = 0, action: AnyAction) => {
+const myData: Reducer<StateFromProps> = (state = { value: 0 }, action: AnyAction): StateFromProps => {
     switch (action.type) {
-        case "setValue":
-            return action.value;
+        case Actions.SetValue:
+            return { ...state, value: action.value };
         default:
             return state;
     }
 };
 
 interface StoreState {
-    value: number;
+    myData: { value: number };
 }
 
-export const reducers = combineReducers<StoreState>({ value });
+export const reducers = combineReducers<StoreState>({ myData });
