@@ -1,6 +1,6 @@
 import { AnyAction, Reducer } from "redux";
-import { Actions } from "./actions";
-import { StartProps } from "./Start";
+import { Actions } from "../../models/Actions";
+import { StartProps } from "./MyData";
 
 export const myData: Reducer<StartProps> = (state = { value: 0 }, action: AnyAction): StartProps => {
     switch (action.type) {

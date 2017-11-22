@@ -1,9 +1,9 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
+import { StoreState } from "../../models/StoreState";
+import { Input } from "../Input";
+import { Slider } from "../Slider";
 import { setValue, SetValueAction } from "./actions";
-import { Input } from "./Input";
-import { Slider } from "./Slider";
-import { StoreState } from "./StoreState";
 
 export interface StartProps {
     value: number;

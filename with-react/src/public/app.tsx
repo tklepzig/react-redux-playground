@@ -4,13 +4,13 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import "./app.scss";
-import { rootReducer } from "./components/rootReducer";
-import Start from "./components/Start";
+import MyData from "./components/MyData/MyData";
+import { rootReducer } from "./rootReducer";
 
 const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
     <Provider store={store}>
-        <Start />
+        <MyData />
     </Provider>,
     document.getElementById("root"));

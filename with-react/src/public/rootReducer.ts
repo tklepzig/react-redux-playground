@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { myData } from "./myDataReducer";
-import { StoreState } from "./StoreState";
+import { myData } from "./components/MyData/reducers";
+import { StoreState } from "./models/StoreState";
 
 export const rootReducer = combineReducers<StoreState>({ myData });

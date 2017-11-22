@@ -1,8 +1,5 @@
 import { Action } from "redux";
-
-export enum Actions {
-    SetValue
-}
+import { Actions } from "../../models/Actions";
 
 export interface SetValueAction extends Action {
     value: number;
